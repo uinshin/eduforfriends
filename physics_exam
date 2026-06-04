@@ -1,0 +1,2155 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Экзамен по физике — 143 вопроса</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;500;600&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0e0f13;
+    --bg2: #16181f;
+    --bg3: #1e2029;
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(255,255,255,0.14);
+    --text: #e8eaf0;
+    --text-muted: #7e8494;
+    --text-dim: #4a4f5e;
+    --accent: #5b8cf7;
+    --accent2: #7c6af0;
+    --accent-glow: rgba(91,140,247,0.12);
+    --section-colors: #5b8cf7, #7c6af0, #4dbfa8, #e87c5c, #e0c05a, #c97be0, #5bafdb;
+    --green: #4dbfa8;
+    --amber: #e0c05a;
+    --coral: #e87c5c;
+    --purple: #7c6af0;
+  }
+
+  body {
+    font-family: 'Geologica', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  header {
+    padding: 4rem 2rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .header-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+  }
+
+  header h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 300;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+
+  header h1 span {
+    color: var(--accent);
+  }
+
+  .header-meta {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .meta-pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+
+  .meta-pill span { color: var(--text); }
+
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .section-block {
+    margin-bottom: 3rem;
+    animation: fadeIn 0.4s ease forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-block:nth-child(1) { animation-delay: 0.05s; }
+  .section-block:nth-child(2) { animation-delay: 0.1s; }
+  .section-block:nth-child(3) { animation-delay: 0.15s; }
+  .section-block:nth-child(4) { animation-delay: 0.2s; }
+  .section-block:nth-child(5) { animation-delay: 0.25s; }
+  .section-block:nth-child(6) { animation-delay: 0.3s; }
+  .section-block:nth-child(7) { animation-delay: 0.35s; }
+  .section-block:nth-child(8) { animation-delay: 0.4s; }
+  .section-block:nth-child(9) { animation-delay: 0.45s; }
+  .section-block:nth-child(10) { animation-delay: 0.5s; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .section-count {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-left: auto;
+  }
+
+  .q-block {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 6px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .q-block:hover {
+    border-color: var(--border-hover);
+  }
+
+  .q-block.open {
+    border-color: var(--border-hover);
+    background: var(--bg3);
+  }
+
+  .q-trigger {
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    text-align: left;
+    color: var(--text);
+    font-family: 'Geologica', sans-serif;
+    font-size: 14.5px;
+    font-weight: 400;
+    line-height: 1.5;
+    transition: background 0.15s;
+  }
+
+  .q-trigger:hover {
+    background: rgba(255,255,255,0.02);
+  }
+
+  .q-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    padding-top: 2px;
+    flex-shrink: 0;
+    min-width: 28px;
+  }
+
+  .q-text { flex: 1; }
+
+  .q-chevron {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 1px;
+    color: var(--text-dim);
+    transition: transform 0.25s cubic-bezier(0.4,0,0.2,1), color 0.2s;
+  }
+
+  .q-block.open .q-chevron {
+    transform: rotate(180deg);
+    color: var(--accent);
+  }
+
+  .q-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .q-answer-inner {
+    padding: 0 1.25rem 1.25rem 3.5rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+  }
+
+  .q-answer-inner ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .q-answer-inner li {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.65;
+    padding-left: 1.1em;
+    position: relative;
+  }
+
+  .q-answer-inner li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 18px;
+    line-height: 1.3;
+  }
+
+  .formula {
+    font-family: 'DM Mono', monospace;
+    font-size: 12.5px;
+    color: var(--green);
+    background: rgba(77,191,168,0.07);
+    padding: 1px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    border-top: 1px solid var(--border);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .expand-all-bar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1.5rem;
+    gap: 8px;
+  }
+
+  .ctrl-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: var(--text-dim);
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 5px 12px;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  .ctrl-btn:hover {
+    color: var(--text);
+    border-color: var(--border-hover);
+  }
+
+  @media (max-width: 600px) {
+    header, main { padding: 1.5rem 1rem; }
+    .q-answer-inner { padding-left: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-label">Подготовка к экзамену</div>
+  <h1>Физика — <span>143 вопроса</span></h1>
+  <div class="header-meta">
+    <span class="meta-pill"><span>9</span> разделов</span>
+    <span class="meta-pill"><span>143</span> вопроса</span>
+    <span class="meta-pill">Нажмите на вопрос, чтобы увидеть ответ</span>
+  </div>
+</header>
+
+<main>
+  <div class="expand-all-bar">
+    <button class="ctrl-btn" onclick="toggleAll(true)">развернуть все</button>
+    <button class="ctrl-btn" onclick="toggleAll(false)">свернуть все</button>
+  </div>
+
+  <!-- SECTION 1: МЕХАНИКА -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-dot" style="background:#5b8cf7"></div>
+      <div class="section-title">Механика</div>
+      <div class="section-count">вопросы 1–13</div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">1.</span>
+        <span class="q-text">Механическое движение. Перемещение. Путь. Скорость.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Механическое движение – изменения с течением времени взаимного положения тел или их частей в пространстве.</li>
+        <li>Путь – скалярная величина, равная длине траектории.</li>
+        <li>Перемещение – вектор, соединяющий первую и последнюю точку траектории.</li>
+        <li>Скорость – векторная величина, характеризующая направление движения тела и быстроту его перемещения.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">2.</span>
+        <span class="q-text">Равномерное прямолинейное движение.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Это движение по прямой с постоянной скоростью.</li>
+        <li>Закон равномерного движения описывается формулой: <span class="formula">X = X₀ + Ut</span>.</li>
+        <li>В этой формуле X – координата, X₀ – начало координат, U – скорость, T – время.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">3.</span>
+        <span class="q-text">Ускорение. Движение с ускорением.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Ускорение – векторная величина, характеризующая быстроту изменения скорости материальной точки по модулю и направлению. Формула: <span class="formula">a = (u − u₀) / t</span>.</li>
+        <li>Движение с ускорением делится на равнозамедленное и равноускоренное.</li>
+        <li>При таком движении скорость равна <span class="formula">U = U₀ + at</span>, а путь вычисляется как <span class="formula">S = U₀t + (at²)/2</span> или <span class="formula">S = (u² − u₀²)/(2a)</span>.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">4.</span>
+        <span class="q-text">Свободное падение.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Ускорение свободного падения – ускорение, с которым падают все тела на земле, независимо от их массы в отсутствии сопротивления воздуха. Его значение <span class="formula">g = 9,8 м/с²</span>.</li>
+        <li>Формулы движения: <span class="formula">U = U₀ + gt</span>, <span class="formula">h = U₀t + (gt²)/2</span>, <span class="formula">h = (u² − u₀²)/(2g)</span>.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">5.</span>
+        <span class="q-text">Движение тела, брошенного под углом к горизонту.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Такое тело движется по параболе: движение по оси X равномерное, а по оси Y – равнопеременное с ускорением свободного падения.</li>
+        <li>Если угол равен 45°, то дальность полёта максимальная.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">6.</span>
+        <span class="q-text">Равномерное движение по окружности.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Это повторное движение с постоянной линейной скоростью. Тело при этом движется по окружности с центростремительным ускорением <span class="formula">a = u²/R</span>.</li>
+        <li>Период – время одного оборота (<span class="formula">T = t/N</span>).</li>
+        <li>Частота – число оборотов за 1 секунду.</li>
+        <li>Угловая скорость – быстрота поворота.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">7.</span>
+        <span class="q-text">Первый закон Ньютона. Сила. Масса. Импульс.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Первый закон Ньютона: любая материальная точка сохраняет состояние покоя или равномерного прямолинейного движения пока внешнее воздействие не изменит это состояние.</li>
+        <li>Сила – векторная величина, мера механического воздействия на тело со стороны других тел.</li>
+        <li>Масса – скалярная величина, мера инертности тела.</li>
+        <li>Импульс тела – векторная величина равная произведению массы тела на скорость (<span class="formula">p = mu</span>).</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">8.</span>
+        <span class="q-text">Второй и Третий законы Ньютона.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Второй закон Ньютона: в ИСО ускорение тела прямопропорционально силе, действующей на тело и обратнопропорционально массе этого тела (<span class="formula">a = F/m</span>).</li>
+        <li>Третий закон Ньютона: в ИСО силы взаимодействия 2 тел равны по модулю, противоположны по направлению и направлены вдоль прямой, соединяющей эти тела (<span class="formula">F₁₂ = −F₂₁</span>).</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">9.</span>
+        <span class="q-text">Закон всемирного тяготения. Гравитационное поле. Сила тяжести. Вес.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Закон всемирного тяготения: любые 2 материальные точки притягиваются друг к другу с силой, пропорциональной произведению их масс и обратно пропорционально к квадрату расстояния между ними.</li>
+        <li>Гравитационное поле – особая форма материи, посредством которой осуществляется гравитационное взаимодействие.</li>
+        <li>Сила тяжести – сила, которая действует на тела вследствие его притяжения к земле (<span class="formula">Fтяж = mg</span>).</li>
+        <li>Вес – сила, с которой тело действует на опору или натягивает подвес.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">10.</span>
+        <span class="q-text">Силы трения и упругости.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Сила трения – сила, возникающая при соприкосновении поверхностей тел и препятствующая их относительному перемещению в плоскости касания.</li>
+        <li>Сила упругости – сила, возникающая при деформации тела и стремящаяся восстановить его начальные формы и размеры. Подчиняется закону Гука: <span class="formula">Fупр = k|x|</span>.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">11.</span>
+        <span class="q-text">Закон сохранения импульса.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>В ИСО суммарный импульс замкнутой системы тел не изменяется (<span class="formula">P₁ + P₂ = const</span>).</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">12.</span>
+        <span class="q-text">Работа силы. Мощность.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Работа – физическая величина, равная произведению силы на перемещение и на косинус угла между ними (<span class="formula">A = F · Δr · cos d</span>).</li>
+        <li>Мощность – работа за 1 секунду (<span class="formula">N = A/t</span>).</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">13.</span>
+        <span class="q-text">Энергия. Кинетическая и Потенциальная энергия. Закон сохранения энергии.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Механическая энергия – физическая величина, характеризующая способность тела совершать работу.</li>
+        <li>Кинетическая энергия (энергия движения) равна <span class="formula">Ek = (mu²)/2</span>.</li>
+        <li>Потенциальная энергия (энергия взаимодействия) равна <span class="formula">En = mgh</span> для гравитации или <span class="formula">En = (kx²)/2</span> для силы упругости.</li>
+        <li>Закон сохранения энергии гласит, что в замкнутой системе тел полная механическая энергия не изменяется.</li>
+      </ul></div></div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: МКТ и Термодинамика -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-dot" style="background:#7c6af0"></div>
+      <div class="section-title">Молекулярно-кинетическая теория (МКТ) и Термодинамика</div>
+      <div class="section-count">вопросы 14–40</div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">14.</span>
+        <span class="q-text">Основные положения МКТ и их опытное обоснование.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Все вещества состоят из молекул, между которыми имеются межмолекулярные промежутки.</li>
+        <li>Молекулы вещества находятся в непрерывном и хаотичном движении.</li>
+        <li>Между молекулами действует одновременно сила притяжения и отталкивания, природа этих сил электромагнитная.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">15.</span>
+        <span class="q-text">Броуновское движение. Диффузия.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Диффузия – явление, связанное с проникновением в промежутки между молекулами другого вещества, что приводит к выравниванию концентрации молекул.</li>
+        <li>Броуновское движение – это движение твёрдых частиц, взвешенных в газе или в воде под действием ударов молекул.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">16.</span>
+        <span class="q-text">Силы межмолекулярного взаимодействия.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Так как в составе молекул входят + и – заряды, между ними возникают короткодействующие силы притяжения и отталкивания.</li>
+        <li>Если расстояние <span class="formula">r = r₀</span>, то силы притяжения равны силам отталкивания. Если <span class="formula">r &lt; r₀</span>, преобладает отталкивание, а если <span class="formula">r &gt; r₀</span>, преобладает притяжение.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">17.</span>
+        <span class="q-text">Энергия молекул.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Так как молекулы находятся в непрерывном и хаотичном движении, они обладают кинетической энергией.</li>
+        <li>Их потенциальная энергия зависит от расстояния между ними.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">18.</span>
+        <span class="q-text">Характеристика газообразного состояния вещества. Понятие температуры и внутренней энергии.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Молекулы газа находятся на расстоянии больших радиусов молекулярного действия, поэтому силы взаимодействия не могут удержать их друг около друга, и они разлетаются по всему предоставленному объёму.</li>
+        <li>Температура – степень нагретости тела, которую измеряют термометром.</li>
+        <li>Внутренняя энергия тел – сумма кинетической и потенциальной энергии всех молекул тела, которая зависит от температуры.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">19.</span>
+        <span class="q-text">Скорости движения молекул. Опыт Штерна. Длина свободного пробега молекул.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Средняя квадратичная скорость вычисляется как <span class="formula">Uск = √(3KT/m₀)</span>.</li>
+        <li>Длина свободного пробега молекул – расстояние, которое проходит молекула между двумя последовательными столкновениями.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">20.</span>
+        <span class="q-text">Атомная единица массы, моль, количество вещества. Постоянная Авогадро, Лошмидта, концентрация.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Атомная единица массы – это 1/12 массы изотопа углерода.</li>
+        <li>Моль – такое количество вещества, масса которого в граммах равна относительной молекулярной массе.</li>
+        <li>Количество вещества (ν) вычисляется как <span class="formula">ν = m/M</span> или <span class="formula">ν = N/Nₐ</span>.</li>
+        <li>Число Авогадро (Nₐ) – число молекул в моле любого вещества (<span class="formula">6,022 · 10²³ моль⁻¹</span>).</li>
+        <li>Число Лошмидта – число молекул тела в единице объёма при нормальных условиях.</li>
+        <li>Концентрация вещества – это число молекул в единице объёма (<span class="formula">n = N/V</span>).</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">21.</span>
+        <span class="q-text">Понятие вакуума. Идеальный газ.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Идеальный газ – газ, в котором силы взаимодействия между молекулами отсутствуют, а сами молекулы принимаются за материальные точки.</li>
+        <li>Вакуум – такое состояние газа, в котором длина свободного пробега молекул сравнима с размерами сосуда.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">22.</span>
+        <span class="q-text">Зависимость давления газа от температуры при постоянном объёме.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Зависимость давления газа от температуры при постоянном объёме выражается формулой <span class="formula">p = p₀(1 + γt)</span>.</li>
+        <li>Зависимость давления от абсолютной температуры: <span class="formula">P ~ T</span>. Давление газа не зависит от его природы, а определяется только его температурой и концентрацией молекул (<span class="formula">P = nKT</span>).</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">23.</span>
+        <span class="q-text">Зависимость средней кинетической энергии поступательного движения молекул от температуры.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Средняя кинетическая энергия молекул прямо пропорциональна абсолютной температуре: <span class="formula">Eпост = (3/2)KT</span>.</li>
+        <li>В этой формуле K – постоянная Больцмана (<span class="formula">1,38 · 10⁻²³ Дж/К</span>).</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">24.</span>
+        <span class="q-text">Абсолютный нуль. Термодинамическая шкала температур.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Абсолютный ноль – это температура −273°С, при которой прекращается поступательное движение молекул. Температур ниже абсолютного нуля в природе не существует.</li>
+        <li>Абсолютная температура – температура, выраженная в кельвинах по термодинамической шкале (<span class="formula">T = t + 273</span>).</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">25.</span>
+        <span class="q-text">Термодинамические параметры. Объединённый газовый закон. Уравнение Клапейрона–Менделеева.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Термодинамические параметры – макроскопические величины, характеризующие состояние газа (p, V, T).</li>
+        <li>Объединённый газовый закон: <span class="formula">(P₁·V₁)/T₁ = (P₂·V₂)/T₂</span>.</li>
+        <li>Уравнение состояния газа: <span class="formula">pV = (m/M)RT</span>.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">26.</span>
+        <span class="q-text">Изохорный процесс и его графики.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Процесс, протекающий при постоянной массе и постоянном объёме (<span class="formula">V = const</span>).</li>
+        <li>Описывается Законом Шарля: при постоянной массе и объёме давление газа прямо пропорционально его абсолютной температуре (<span class="formula">P₁/T₁ = P₂/T₂</span>).</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">27.</span>
+        <span class="q-text">Изобарный процесс и его графики.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Процесс, происходящий при постоянной массе и постоянном давлении (<span class="formula">P = const</span>).</li>
+        <li>Описывается Законом Гей-Люссака: при постоянной массе и давлении объём газа прямо пропорционален его абсолютной температуре (<span class="formula">V₁/T₁ = V₂/T₂</span>).</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">28.</span>
+        <span class="q-text">Изотермический процесс и его графики.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Процесс, происходящий при постоянной массе и постоянной температуре (<span class="formula">T = const</span>).</li>
+        <li>Описывается Законом Бойля–Мариотта: при постоянной массе и температуре давление газа обратно пропорционально его объёму (<span class="formula">P₁·V₁ = P₂·V₂</span>).</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">29.</span>
+        <span class="q-text">Внутренняя энергия идеального газа. Способы изменения внутренней энергии.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Внутренняя энергия равна сумме кинетических энергий всех его молекул.</li>
+        <li>Способы её изменения: совершение механической работы и теплообмен.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">30.</span>
+        <span class="q-text">Теплообмен и его виды.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Теплообмен – процесс передачи внутренней энергии без совершения механической работы.</li>
+        <li>Теплопроводность – обусловлена хаотичным движением молекул.</li>
+        <li>Конвекция – перемешивание неравномерно прогретых слоёв жидкостей или газа.</li>
+        <li>Излучение – передача энергии с помощью электромагнитных волн.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">31.</span>
+        <span class="q-text">Количество теплоты. Уравнение теплового баланса.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Количество теплоты (Q) – изменение внутренней энергии при теплообмене.</li>
+        <li>Уравнение теплового баланса: сумма количеств теплоты, отданных всеми телами, равна количеству теплоты, полученной телами (<span class="formula">∑Qотд = ∑Qполуч</span>).</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">32.</span>
+        <span class="q-text">Изменение внутренней энергии тел при нагревании и охлаждении. Удельная теплоёмкость вещества.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Теплота при нагревании и охлаждении: <span class="formula">Q = cmΔT</span>.</li>
+        <li>Удельная теплоёмкость вещества (c) – количество теплоты, необходимое для изменения температуры 1 кг вещества на 1 К.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">33.</span>
+        <span class="q-text">Работа газа при изобарном изменении объёма. Молярная газовая постоянная.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Работа газа (при P = const): <span class="formula">A = PΔV</span> или <span class="formula">A = (m/M)RΔT</span>.</li>
+        <li>Молярная газовая постоянная (R) – работа, которую совершает один моль газа на 1 кельвин (<span class="formula">R = 8,31 Дж/(моль·К)</span>).</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">34.</span>
+        <span class="q-text">Первое начало термодинамики. Применение первого начала термодинамики к изопроцессам.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Первое начало: <span class="formula">Q = ΔU + A</span>. Количество теплоты, переданное газу, идёт на увеличение его внутренней энергии и на совершение механической работы.</li>
+        <li>Изобарный (P = const): <span class="formula">Q = ΔU + A</span>.</li>
+        <li>Изохорный (V = const): работа не совершается (A = 0), вся теплота идёт на увеличение внутренней энергии (<span class="formula">Q = ΔU</span>).</li>
+        <li>Изотермический (T = const): внутренняя энергия не меняется (ΔU = 0), вся теплота расходуется на совершение работы (<span class="formula">Q = A</span>).</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">35.</span>
+        <span class="q-text">Адиабатный процесс.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Это процесс, происходящий в газе без обмена теплом с окружающей средой (<span class="formula">Q = 0</span>). Процесс может быть адиабатным, если он происходит очень быстро.</li>
+        <li>Работа совершается только за счёт изменения внутренней энергии: <span class="formula">A = −ΔU</span>.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">36.</span>
+        <span class="q-text">Необратимость тепловых процессов. Второй закон термодинамики.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Все процессы в природе являются необратимыми (могут самопроизвольно протекать только в одном направлении).</li>
+        <li>Второе начало термодинамики: теплота не может сама собой переходить от тела с более низкой температурой к телу с более высокой температурой.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">37.</span>
+        <span class="q-text">Тепловые двигатели. Принцип их работы. Идеальная тепловая машина.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Тепловой двигатель – машина, в которой тепловая энергия топлива превращается в механическую энергию.</li>
+        <li>Идеальная тепловая машина – машина, в которой рабочим телом является идеальный газ и отсутствуют любые потери тепла на трение и теплопроводность.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">38.</span>
+        <span class="q-text">КПД теплового двигателя.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>КПД (η) – отношение механической работы, совершаемой двигателем, к количеству теплоты, полученной от нагревателя.</li>
+        <li>Формула: <span class="formula">η = A/Q₁ = (Q₁ − Q₂)/Q₁</span>. КПД идеального двигателя: <span class="formula">η = (T₁ − T₂)/T₁</span>.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">39.</span>
+        <span class="q-text">Испарение и конденсация.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Испарение – парообразование со свободной границы жидкости с газообразной средой. При испарении жидкость покидают молекулы с большой кинетической энергией, поэтому внутренняя энергия и температура жидкости уменьшаются.</li>
+        <li>Обратный процесс (переход из газа в жидкость) называется конденсацией. Теплота парообразования/конденсации: <span class="formula">Q = rm</span>.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">40.</span>
+        <span class="q-text">Удельная теплота парообразования.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Удельная теплота парообразования (r) – это количество теплоты, необходимое для превращения 1 кг жидкости, находящейся при температуре кипения, в пар. Измеряется в Дж/кг. Чем выше температура, тем меньше r.</li>
+      </ul></div></div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: Агрегатные состояния -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-dot" style="background:#4dbfa8"></div>
+      <div class="section-title">Агрегатные состояния вещества</div>
+      <div class="section-count">вопросы 41–52</div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">41.</span>
+        <span class="q-text">Насыщенный пар и его свойства.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Насыщенный пар – пар, который находится в динамическом равновесии со своей жидкостью.</li>
+        <li>При изохорном нагревании давление насыщенного пара увеличивается быстрее ненасыщенного пара. В изотермическом процессе давление насыщенного пара не изменяется.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">42.</span>
+        <span class="q-text">Кипение. Зависимость температуры кипения жидкости от давления.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Кипение – парообразование со всего объёма жидкости при постоянной температуре. Температура кипения зависит от внешнего давления: чем оно выше, тем больше температура кипения.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">43.</span>
+        <span class="q-text">Критическое состояние вещества. Сжижение газов.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Критическое состояние вещества – состояние, при котором плотность жидкости равна плотности насыщенного пара. Критическая температура – наивысшая температура, при которой пар может быть превращён в жидкость.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">44.</span>
+        <span class="q-text">Влажность воздуха. Точка росы. Способы определения влажности воздуха.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Влажность воздуха характеризует содержание пара в атмосфере. Относительная влажность – отношение плотности пара к плотности насыщенного пара при той же температуре в процентах.</li>
+        <li>Точка росы – температура, при которой водяной пар становится насыщенным.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">45.</span>
+        <span class="q-text">Свойства жидкого состояния вещества.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Жидкость сохраняет свой объём, обладает текучестью, принимая форму сосуда. Является трудносжимаемой. В жидкости существует ближний порядок расположения молекул.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">46.</span>
+        <span class="q-text">Поверхностный слой жидкости. Поверхностное натяжение жидкости. Сила поверхностного натяжения.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Коэффициент поверхностного натяжения (σ) равен отношению работы по сокращению площади свободной поверхности к изменению этой площади.</li>
+        <li>Сила поверхностного натяжения (F) направлена по касательной к поверхности: <span class="formula">F = σ·l</span>.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">47.</span>
+        <span class="q-text">Явления на границе жидкости с твёрдым телом.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Смачивание возникает, если молекулы жидкости сильнее притягиваются к поверхности твёрдого тела, чем друг к другу.</li>
+        <li>Несмачивание происходит наоборот.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">48.</span>
+        <span class="q-text">Капиллярные явления и их использование.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Капилляры – трубки с малым внутренним диаметром. В смачивающей жидкости она поднимается по капилляру вверх (<span class="formula">h = (2σ)/(ρgR)</span>).</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">49.</span>
+        <span class="q-text">Кристаллы. Изотропия и анизотропия кристаллов. Аморфные тела.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Монокристаллы обладают анизотропией. Поликристаллы обладают изотропией.</li>
+        <li>Аморфные тела – переохлаждённые жидкости без кристаллической решётки (стекло, пластмасса).</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">50.</span>
+        <span class="q-text">Виды кристаллических решёток.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Ионная (все соли), Атомная (алмаз, кремний), Металлическая (все металлы), Молекулярная (лёд).</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">51.</span>
+        <span class="q-text">Плавление и кристаллизация. Удельная теплота плавления.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Плавление – переход из твёрдого вещества в жидкое.</li>
+        <li>Удельная теплота плавления (λ) – количество теплоты, необходимое для того, чтобы расплавить 1 кг твёрдого тела: <span class="formula">Q = λm</span>.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">52.</span>
+        <span class="q-text">Линейное и объёмное расширение тел при нагревании. Зависимость плотности вещества от температуры.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>При нагревании происходит увеличение линейных размеров тела и его объёма.</li>
+        <li>Формула линейного расширения: <span class="formula">l = l₀(1 + αΔT)</span>. Объёмного: <span class="formula">V = V₀(1 + βΔT)</span>.</li>
+      </ul></div></div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: Электростатика -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-dot" style="background:#e87c5c"></div>
+      <div class="section-title">Электростатика</div>
+      <div class="section-count">вопросы 53–66</div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">53.</span>
+        <span class="q-text">Электризация тел. Взаимодействие наэлектризованных тел. Закон сохранения электрического заряда.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Электризация – передача телом электрического заряда. Виды: трение, соприкосновение, влияние.</li>
+        <li>Закон сохранения: <span class="formula">q₁ + q₂ + … + qₙ = const</span>.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">54.</span>
+        <span class="q-text">Закон Кулона. Электрическая постоянная. Диэлектрическая проницаемость среды.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Сила взаимодействия двух точечных зарядов: <span class="formula">F = K·(q₁·q₂)/r²</span>.</li>
+        <li>Электрическая постоянная (ε₀) = <span class="formula">8,85 · 10⁻¹² Кл²/(Н·м²)</span>.</li>
+        <li>Диэлектрическая проницаемость показывает, во сколько раз сила в вакууме больше, чем в среде.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">55.</span>
+        <span class="q-text">Электрическое поле. Напряжённость электрического поля.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Напряжённость (E) – величина, численно равная силе, с которой поле действует на единичный положительный заряд: <span class="formula">E = F/q</span>.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">56.</span>
+        <span class="q-text">Напряжённость эл. поля, созданного точечным зарядом. Принцип суперпозиции полей.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Принцип суперпозиции: напряжённость поля, созданного несколькими зарядами, равна векторной сумме напряжённостей от каждого заряда.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">57.</span>
+        <span class="q-text">Линии напряжённости электрического поля. Однородное поле. Поверхностная плотность заряда.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Линии начинаются на плюсе и заканчиваются на минусе.</li>
+        <li>Однородное поле: векторы одинаковы и параллельны.</li>
+        <li>Поверхностная плотность <span class="formula">σ = q/S</span>.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">58.</span>
+        <span class="q-text">Работа при перемещении заряда электрическим полем.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Работа в однородном электрическом поле не зависит от формы пути, а зависит только от положения начальной и конечной точки (поле является потенциальным).</li>
+        <li><span class="formula">A = E·q·d</span>.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">59.</span>
+        <span class="q-text">Потенциал. Потенциал эл. поля, созданного точечным зарядом, шаром.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Потенциал (φ) – отношение потенциальной энергии к заряду (<span class="formula">φ = En/q</span>).</li>
+        <li>Потенциал точечного заряда: <span class="formula">φ = q / (4πεε₀r)</span>.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">60.</span>
+        <span class="q-text">Разность потенциалов. Связь между напряжённостью эл. поля и разностью потенциалов.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Работа <span class="formula">A = qU</span>, где U — разность потенциалов.</li>
+        <li>Связь: <span class="formula">E = U/d</span>.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">61.</span>
+        <span class="q-text">Проводники в электрическом поле. Электростатическая индукция.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Перераспределение зарядов внутри проводника под действием внешнего поля называется электрической индукцией.</li>
+        <li>Внутри возникает встречное поле, полностью гасящее внешнее.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">62.</span>
+        <span class="q-text">Диэлектрики в электрическом поле. Поляризация диэлектриков.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>В диэлектриках происходит поляризация — молекулы выстраиваются по полю. Это приводит к ослаблению внешнего поля внутри диэлектрика в ε раз.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">63.</span>
+        <span class="q-text">Электроёмкость проводника. Единицы электроёмкости.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Электроёмкость характеризует способность проводника накапливать заряд (<span class="formula">C = q/φ</span>). Измеряется в Фарадах (Ф).</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">64.</span>
+        <span class="q-text">Конденсаторы. Электроёмкость конденсатора.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Конденсатор – прибор для накопления зарядов и энергии.</li>
+        <li>Формула электроёмкости плоского конденсатора: <span class="formula">C = (εε₀S)/d</span>.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">65.</span>
+        <span class="q-text">Соединение конденсаторов в батарею (последовательное, параллельное, смешанное).</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Конденсаторы могут соединяться последовательно, параллельно и смешанно для получения нужной ёмкости.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">66.</span>
+        <span class="q-text">Энергия электрического поля.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Энергия заряженного конденсатора численно равна работе: <span class="formula">W = (CU²)/2</span>.</li>
+      </ul></div></div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: Постоянный ток -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-dot" style="background:#e0c05a"></div>
+      <div class="section-title">Постоянный электрический ток</div>
+      <div class="section-count">вопросы 67–83</div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">67.</span>
+        <span class="q-text">Электрический ток в металлах. Сила тока, плотность тока. Условия существования.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Ток – направленное движение свободных электронов. Условия: наличие зарядов и электрического поля.</li>
+        <li>Сила тока <span class="formula">I = q/t</span>. Плотность тока <span class="formula">J = I/S</span>.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">68.</span>
+        <span class="q-text">Закон Ома для участка цепи. ВАХ.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Закон Ома: сила тока прямо пропорциональна напряжению и обратно пропорциональна сопротивлению (<span class="formula">I = U/R</span>).</li>
+        <li>ВАХ – график зависимости силы тока от напряжения.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">69.</span>
+        <span class="q-text">Сопротивление. Зависимость от размеров, материала и температуры.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li><span class="formula">R = (ρ·l)/S</span>. При нагревании металла его сопротивление увеличивается по закону <span class="formula">R = R₀(1 + αΔT)</span>.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">70.</span>
+        <span class="q-text">Соединение проводников.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Последовательное: <span class="formula">I = const</span>, <span class="formula">R = R₁ + R₂</span>.</li>
+        <li>Параллельное: <span class="formula">U = const</span>, <span class="formula">1/R = 1/R₁ + 1/R₂</span>.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">71.</span>
+        <span class="q-text">Работа электрического тока.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li><span class="formula">A = IUt = I²Rt</span>. Измеряется электросчётчиком.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">72.</span>
+        <span class="q-text">Мощность электрического тока.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Мощность – работа за единицу времени. <span class="formula">P = IU = I²R</span>. Измеряется в Ваттах.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">73.</span>
+        <span class="q-text">Тепловое действие тока. Закон Джоуля–Ленца.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Количество теплоты, выделенное проводником: <span class="formula">Q = I²·R·t</span>.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">74.</span>
+        <span class="q-text">Электродвижущая сила источника тока. Сторонние силы.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Сторонние силы – силы неэлектрического происхождения.</li>
+        <li>ЭДС – это работа сторонних сил при перемещении единичного положительного заряда вдоль всей цепи.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">75.</span>
+        <span class="q-text">Закон Ома для полной цепи. Короткое замыкание.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li><span class="formula">I = ε/(R + r)</span>. Короткое замыкание: замыкание полюсов без нагрузки, сила тока максимальна: <span class="formula">Iзк = ε/r</span>.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">76.</span>
+        <span class="q-text">Электролитическая диссоциация. Электрический ток в электролитах.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Диссоциация – распад на ионы.</li>
+        <li>Ток в электролитах – это направленное движение положительных ионов к катоду, а отрицательных — к аноду.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">77.</span>
+        <span class="q-text">Электролиз. Законы электролиза. Применение.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Выделение вещества на электродах. Законы Фарадея: <span class="formula">m = kIt</span>.</li>
+        <li>Применяется для очистки металлов, гальваностегии.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">79.</span>
+        <span class="q-text">Электрический ток в газах. ВАХ газового промежутка.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Ток в газах — это встречное движение ионов и электронов под действием ионизатора. При высоком напряжении переходит в самостоятельный разряд.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">80.</span>
+        <span class="q-text">Виды самостоятельных разрядов. Плазма.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Виды: тлеющий, дуговой, коронный, искровой.</li>
+        <li>Плазма – частично или полностью ионизированный электрически нейтральный газ.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">81.</span>
+        <span class="q-text">Соединение источников тока в батарею.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Последовательное: <span class="formula">I = (n·ε)/(R + n·r)</span>.</li>
+        <li>Параллельное: <span class="formula">I = ε/(R + r/m)</span>.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">82.</span>
+        <span class="q-text">Электрический ток в полупроводниках. Собственная и примесная проводимость.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Ток направлен движением свободных электронов и дырок.</li>
+        <li>Собственная проводимость — у чистых полупроводников, примесная — у легированных (n или p типа).</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">83.</span>
+        <span class="q-text">Электронно-дырочный переход и его применение (диод, транзистор).</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>p-n переход пропускает ток в одном направлении.</li>
+        <li>Применяется в диодах (один переход) и транзисторах (два перехода, для усиления тока).</li>
+      </ul></div></div>
+    </div>
+  </div>
+
+  <!-- SECTION 6: Магнетизм и ЭМИ -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-dot" style="background:#c97be0"></div>
+      <div class="section-title">Магнитные явления и электромагнитная индукция</div>
+      <div class="section-count">вопросы 84–94</div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">84.</span>
+        <span class="q-text">Магнитное поле. Магнитная индукция. Правило буравчика.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Магнитное поле (МП) порождается движущимися зарядами (токами). Характеризуется вектором магнитной индукции (B).</li>
+        <li>Правило буравчика связывает направление тока и вектор B.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">85.</span>
+        <span class="q-text">Линии магнитной индукции. Магнитное поле токов, соленоида.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Линии индукции всегда замкнуты, охватывают проводник с током, выходят из северного полюса и входят в южный.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">86.</span>
+        <span class="q-text">Сила взаимодействия параллельных токов. Магнитная проницаемость среды.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Сила взаимодействия параллельных токов прямо пропорциональна силе токов и длине.</li>
+        <li>Магнитная проницаемость показывает, как среда ослабляет силу.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">87.</span>
+        <span class="q-text">Напряжённость магнитного поля.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Напряжённость МП (H) характеризует поле от макротоков. Связь с индукцией: <span class="formula">B = μμ₀H</span>.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">88.</span>
+        <span class="q-text">Сила Ампера. Правило левой руки.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Сила Ампера – сила, действующая на проводник с током в магнитном поле. <span class="formula">F = B·I·l·sin(a)</span>.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">89.</span>
+        <span class="q-text">Сила Лоренца. Движение заряда в магнитном поле.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Сила Лоренца действует на летящий заряд (<span class="formula">F = Bqv·sin(a)</span>). Меняет только направление скорости (по окружности или спирали).</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">90.</span>
+        <span class="q-text">Явление электромагнитной индукции. Опыты Фарадея.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>ЭМИ – явление возникновения электрического тока в проводнике при изменении магнитного поля.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">91.</span>
+        <span class="q-text">Возникновение ЭДС индукции при движении проводника. Правило правой руки.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>При перемещении замкнутого проводника в магнитном поле возникает ЭДС индукции: <span class="formula">ε = Bvl·sin(a)</span>.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">92.</span>
+        <span class="q-text">Закон электромагнитной индукции. Правило Ленца.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>ЭДС индукции прямо пропорциональна скорости изменения магнитного потока (<span class="formula">ε = −ΔФ/Δt</span>).</li>
+        <li>Правило Ленца: индукционный ток противодействует изменению магнитного потока.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">93.</span>
+        <span class="q-text">Явление самоиндукции. ЭДС самоиндукции.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Возникновение ЭДС индукции в цепи, вызванное изменением магнитного поля собственного тока.</li>
+        <li><span class="formula">ε = L(ΔI/Δt)</span>.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">94.</span>
+        <span class="q-text">Магнитный поток, потокосцепление и индуктивность. Энергия магнитного поля.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Магнитный поток <span class="formula">Ф = BS·cos(a)</span>. Индуктивность (L) характеризует катушку.</li>
+        <li>Энергия: <span class="formula">W = (LI²)/2</span>.</li>
+      </ul></div></div>
+    </div>
+  </div>
+
+  <!-- SECTION 7: Колебания и волны -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-dot" style="background:#5bafdb"></div>
+      <div class="section-title">Колебания и волны. Переменный ток</div>
+      <div class="section-count">вопросы 95–105</div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">95.</span>
+        <span class="q-text">Электромагнитные колебания. Колебательный контур. Период и частота.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Колебательный контур — цепь из катушки и конденсатора.</li>
+        <li>Период колебаний (формула Томсона): <span class="formula">T = 2π√(LC)</span>.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">96.</span>
+        <span class="q-text">Автоколебания. Возникновение незатухающих колебаний.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Незатухающие колебания, существующие без внешних периодических сил за счёт подзарядки от внутреннего источника.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">97.</span>
+        <span class="q-text">Генератор незатухающих колебаний на транзисторе.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Для генерации автоколебаний транзистор выполняет роль быстрого автоматического ключа, замыкающего и размыкающего цепь с высокой частотой.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">98.</span>
+        <span class="q-text">Переменный ток. Вращение рамки в однородном магнитном поле.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>При вращении рамки в магнитном поле изменяется магнитный поток, и наводится переменная ЭДС индукции (ток меняется по синусоиде).</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">99.</span>
+        <span class="q-text">Индукционный генератор.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Электрическая машина, преобразующая механическую энергию в электрическую с помощью явления электромагнитной индукции.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">100.</span>
+        <span class="q-text">Действующее значение ЭДС, силы тока, напряжения. Мощность.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Действующее значение равно силе такого постоянного тока, который выделяет такое же количество теплоты.</li>
+        <li>Мощность: <span class="formula">P = IU·cos(φ)</span>.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">101.</span>
+        <span class="q-text">Активное, индуктивное и ёмкостное сопротивления.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Активное — преобразует энергию в тепло.</li>
+        <li>Индуктивное (<span class="formula">X_L = ωL</span>) — напряжение опережает ток.</li>
+        <li>Ёмкостное (<span class="formula">X_C = 1/(ωC)</span>) — напряжение отстаёт от тока.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">103.</span>
+        <span class="q-text">Электромагнитное поле. Постулаты Максвелла.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Постулаты: переменное магнитное поле создаёт вихревое электрическое, и наоборот.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">104.</span>
+        <span class="q-text">Электромагнитные волны. Свойства электромагнитных волн.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Электромагнитная волна поперечная, распространяется со скоростью света.</li>
+        <li>Свойства: отражение, преломление, интерференция, дифракция, поляризация.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">105.</span>
+        <span class="q-text">Схема радиопередатчика. Амплитудная модуляция.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Амплитудная модуляция – изменение амплитуды высокочастотных (ВЧ) колебаний с помощью низкочастотных (НЧ) колебаний.</li>
+      </ul></div></div>
+    </div>
+  </div>
+
+  <!-- SECTION 8: Оптика -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-dot" style="background:#5b8cf7"></div>
+      <div class="section-title">Оптика</div>
+      <div class="section-count">вопросы 107–119</div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">107.</span>
+        <span class="q-text">Развитие взглядов на природу света.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Корпускулярно-волновой дуализм: свет одновременно является электромагнитной волной и потоком частиц (фотонов).</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">108.</span>
+        <span class="q-text">Законы отражения и преломления света. Показатели преломления.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Отражение: угол падения равен углу отражения.</li>
+        <li>Преломление: отношение синусов углов постоянно (n₂/n₁). Абсолютный показатель <span class="formula">n = c/u</span>.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">109.</span>
+        <span class="q-text">Полное отражение света.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Световое излучение, идущее из оптически более плотной среды, при достижении предельного угла полностью отражается от границы (используется в оптоволокне).</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">110.</span>
+        <span class="q-text">Линзы, их виды, свойства, построение изображений.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Бывают собирающие и рассеивающие. Оптическая сила <span class="formula">D = 1/F</span>.</li>
+        <li>Построение ведётся по лучам через оптический центр и фокусы.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">111.</span>
+        <span class="q-text">Интерференция света. Условия минимума и максимума.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Взаимное усиление/ослабление когерентных волн.</li>
+        <li>Условие максимума: разность хода равна целому числу волн. Минимума: нечётному числу полуволн.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">112.</span>
+        <span class="q-text">Интерференция в тонких плёнках. Кольца Ньютона.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Цвета тонких плёнок возникают от интерференции волн от верхней и нижней поверхности.</li>
+        <li>Кольца Ньютона — интерференция в воздушной прослойке линзы.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">114.</span>
+        <span class="q-text">Дифракционная решётка.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Совокупность щелей. Формула решётки (условие максимума): <span class="formula">d·sin(φ) = k·λ</span>.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">115.</span>
+        <span class="q-text">Поляризация света.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Нарушение осевой симметрии электромагнитной волны. Поляризатор пропускает только одно направление колебаний.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">116.</span>
+        <span class="q-text">Дисперсия света. Цвета тел.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Зависимость показателя преломления света от длины волны (фиолетовый преломляется сильнее красного).</li>
+        <li>Цвет тела определяется лучами, которые оно отражает.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">117.</span>
+        <span class="q-text">Спектроскопы. Спектральный анализ.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Метод определения химического состава по спектру.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">118.</span>
+        <span class="q-text">Виды спектров испускания. Спектры поглощения.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Сплошные (твёрдые/жидкие), линейчатые (атомарные газы), полосатые (молекулярные).</li>
+        <li>Поглощение: газ поглощает те волны, которые сам излучает.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">119.</span>
+        <span class="q-text">Инфракрасное и ультрафиолетовое излучения. Рентгеновское излучение.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>ИК – тепловое; УФ – химически активно, убивает микробы; Рентген – сильное проникающее действие.</li>
+      </ul></div></div>
+    </div>
+  </div>
+
+  <!-- SECTION 9: СТО и Квантовая физика -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-dot" style="background:#4dbfa8"></div>
+      <div class="section-title">Основы теории относительности и квантовой физики</div>
+      <div class="section-count">вопросы 121–143</div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">121.</span>
+        <span class="q-text">Постулаты СТО.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Принцип относительности: законы физики одинаковы во всех ИСО.</li>
+        <li>Принцип постоянства скорости света: скорость света в вакууме не зависит от источника.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">122.</span>
+        <span class="q-text">Следствия постулатов СТО.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Относительность одновременности, замедление времени, сокращение длины вдоль движения.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">123.</span>
+        <span class="q-text">Зависимость массы от скорости. Релятивистский импульс.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>В системе, движущейся с релятивистской скоростью, наблюдается эффект увеличения массы тела.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">124.</span>
+        <span class="q-text">Закон взаимосвязи массы и энергии.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Полная энергия свободного тела прямо пропорциональна его массе: <span class="formula">E = mc²</span>.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">125.</span>
+        <span class="q-text">Квантовая гипотеза Планка.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Атомы испускают энергию не непрерывно, а отдельными порциями — квантами (<span class="formula">E = hν</span>).</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">126.</span>
+        <span class="q-text">Фотон и его свойства. Импульс фотона.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Фотон — частица света без массы покоя, летящая со скоростью света.</li>
+        <li>Импульс: <span class="formula">p = h/λ</span>.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">127.</span>
+        <span class="q-text">Давление света. Опыт Лебедева.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Фотоны обладают импульсом и передают его при ударе о поверхность.</li>
+        <li>Лебедев доказал это с помощью крылышек в вакууме.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">128.</span>
+        <span class="q-text">Внешний фотоэффект и законы Столетова.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Испускание электронов под действием света. Существует красная граница фотоэффекта.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">129.</span>
+        <span class="q-text">Квантовая теория фотоэффекта. Уравнение Эйнштейна.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Уравнение: <span class="formula">hν = Aвых + Ek</span>. Энергия кванта идёт на работу выхода и кинетическую энергию электрона.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">130.</span>
+        <span class="q-text">Внутренний фотоэффект. Фотоэлементы.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Увеличение электропроводности полупроводников под действием света. Применяется в солнечных панелях.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">131.</span>
+        <span class="q-text">Строение атома. Опыт Резерфорда. Планетарная модель атома.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Опыт Резерфорда с альфа-частицами доказал наличие ядра.</li>
+        <li>Планетарная модель: в центре массивное положительное ядро, вокруг которого по орбитам вращаются лёгкие электроны.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">132.</span>
+        <span class="q-text">Квантовые постулаты Бора.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>1) Атом находится только в стационарных состояниях (орбитах), где не излучает.</li>
+        <li>2) Излучение/поглощение кванта происходит только при переходе между орбитами.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">133.</span>
+        <span class="q-text">Испускание и поглощение света атомами.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>При переходе электрона вниз атом испускает фотон, при переходе вверх — поглощает.</li>
+        <li>Из-за дискретных уровней спектры газов линейчатые.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">134.</span>
+        <span class="q-text">Лазеры.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Устройства, работающие за счёт вынужденного излучения. Создают мощный, монохроматичный и когерентный луч.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">135.</span>
+        <span class="q-text">Строение атомного ядра. Изотопы.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Ядро состоит из нуклонов (протонов и нейтронов).</li>
+        <li>Изотопы — атомы одного элемента (одинаковое число протонов), но с разным числом нейтронов.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">136.</span>
+        <span class="q-text">Энергия связи атомных ядер. Дефект масс.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Масса ядра меньше суммы масс нуклонов. Разница называется дефектом масс.</li>
+        <li>Энергия связи: <span class="formula">E = ΔM·c²</span>.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">137.</span>
+        <span class="q-text">Радиоактивность. Виды радиоактивного излучения.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Самопроизвольный распад нестабильных ядер.</li>
+        <li>Альфа-лучи (ядра гелия), бета-лучи (электроны) и гамма-лучи (электромагнитные волны).</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">138.</span>
+        <span class="q-text">Закон радиоактивного распада. Правило смещения.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li><span class="formula">N = N₀ · 2^(−t/T)</span>. При альфа-распаде элемент смещается на 2 клетки влево (теряет 2 заряда, 4 массы). При бета — на 1 клетку вправо.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">139.</span>
+        <span class="q-text">Ядерные реакции.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Взаимодействия ядер. Всегда выполняются закон сохранения массы и заряда.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">140.</span>
+        <span class="q-text">Деление ядер урана. Цепная ядерная реакция.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>При попадании нейтрона ядро урана делится на осколки с испусканием новых нейтронов, которые вызывают лавинообразную реакцию.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">141.</span>
+        <span class="q-text">Ядерный реактор.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Установка для управляемой цепной реакции (содержит топливо, замедлитель, поглощающие стержни и теплоноситель).</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">142.</span>
+        <span class="q-text">Термоядерные реакции.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Синтез лёгких ядер в тяжёлые при сверхвысоких температурах (источник энергии звёзд).</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">143.</span>
+        <span class="q-text">Элементарные частицы и их свойства. Античастицы.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Мельчайшие микрообъекты. У большинства есть античастицы с противоположным зарядом (электрон и позитрон).</li>
+        <li>При встрече происходит аннигиляция.</li>
+      </ul></div></div>
+    </div>
+  </div>
+
+  <!-- SECTION 10: Без конспекта -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-dot" style="background:#7e8494"></div>
+      <div class="section-title">Без конспекта (дополнения)</div>
+      <div class="section-count">вопросы 14, 19, 78, 102, 106, 113, 120</div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">14.</span>
+        <span class="q-text">Опытное обоснование МКТ (дополнение).</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>То, что вещества состоят из частиц, доказывается сжимаемостью газов.</li>
+        <li>Хаотичное движение доказывается диффузией и броуновским движением.</li>
+        <li>Взаимодействие — упругостью твёрдых тел.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">19.</span>
+        <span class="q-text">Опыт Штерна (дополнение).</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Опыт для прямого экспериментального измерения скорости теплового движения молекул (атомов серебра) с помощью двух вращающихся цилиндров.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">78.</span>
+        <span class="q-text">Электрический ток в вакууме. Вакуумный диод. Электронно-лучевая трубка.</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Ток в вакууме создаётся с помощью термоэлектронной эмиссии (нагрев катода).</li>
+        <li>Вакуумный диод обладает односторонней проводимостью.</li>
+        <li>ЭЛТ использует электронный пучок для рисования изображения на экране с люминофором.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">102.</span>
+        <span class="q-text">Передача электроэнергии (дополнение).</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Чтобы уменьшить нагрев проводов (потери <span class="formula">Q = I²Rt</span>), силу тока уменьшают, а напряжение повышают с помощью трансформаторов до сотен тысяч вольт.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">106.</span>
+        <span class="q-text">Схема радиоприёмника (дополнение).</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Антенна → Колебательный контур → УВЧ → Детектор (выделяет низкочастотный сигнал из высокочастотного) → УНЧ → Динамик.</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">113.</span>
+        <span class="q-text">Опыт Юнга (дополнение).</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Свет пропускается через две узкие щели, в результате чего на экране наблюдается интерференционная картина (доказательство волновой природы света).</li>
+      </ul></div></div>
+    </div>
+
+    <div class="q-block">
+      <button class="q-trigger" onclick="toggle(this)">
+        <span class="q-num">120.</span>
+        <span class="q-text">Закон сложения скоростей (классический) (дополнение).</span>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="q-answer"><div class="q-answer-inner"><ul>
+        <li>Скорость тела относительно неподвижной системы отсчёта равна векторной сумме скорости тела относительно подвижной системы и скорости самой подвижной системы (<span class="formula">v = v' + V</span>).</li>
+      </ul></div></div>
+    </div>
+  </div>
+
+</main>
+
+<footer>Физика · 143 вопроса · Нажмите на блок, чтобы увидеть ответ</footer>
+
+<script>
+function toggle(btn) {
+  const block = btn.closest('.q-block');
+  const answer = block.querySelector('.q-answer');
+  const isOpen = block.classList.contains('open');
+  if (isOpen) {
+    block.classList.remove('open');
+    answer.style.maxHeight = '0';
+  } else {
+    block.classList.add('open');
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+  }
+}
+
+function toggleAll(open) {
+  document.querySelectorAll('.q-block').forEach(block => {
+    const answer = block.querySelector('.q-answer');
+    if (open) {
+      block.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    } else {
+      block.classList.remove('open');
+      answer.style.maxHeight = '0';
+    }
+  });
+}
+</script>
+</body>
+</html>
