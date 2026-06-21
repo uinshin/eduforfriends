@@ -345,6 +345,93 @@
     .q-trigger { padding: 1rem; font-size: 16px; }
     .q-answer-inner li { font-size: 15px; }
   }
+
+  /* ===== Formula Modal ===== */
+  .formula-btn { color: var(--green) !important; border-color: var(--green) !important; }
+  .formula-btn:hover { background: rgba(77,191,168,0.1) !important; color: var(--green) !important; }
+
+  .fm-overlay {
+    position: fixed; inset: 0; z-index: 1000;
+    display: none; align-items: flex-start; justify-content: center;
+    background: rgba(0,0,0,0.6); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    padding: 2rem 1rem; overflow-y: auto;
+  }
+  .fm-overlay.open { display: flex; }
+
+  .fm-modal {
+    background: var(--bg); border: 1px solid var(--border); border-radius: 16px;
+    width: 100%; max-width: 820px; position: relative; margin: auto;
+    animation: fmIn 0.28s cubic-bezier(0.4,0,0.2,1);
+  }
+  @keyframes fmIn {
+    from { opacity: 0; transform: translateY(14px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .fm-head {
+    position: sticky; top: 0; z-index: 5; background: var(--bg);
+    padding: 1.25rem 1.75rem; border-bottom: 1px solid var(--border);
+    border-radius: 16px 16px 0 0; display: flex; align-items: center; gap: 1rem;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .fm-head-title { font-size: 1.05rem; font-weight: 600; flex: 1; letter-spacing: -0.01em; }
+  .fm-head-count { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--text-dim); }
+  .fm-close {
+    background: none; border: 1px solid var(--border); color: var(--text-muted);
+    border-radius: 7px; width: 32px; height: 32px; cursor: pointer; font-size: 15px;
+    display: flex; align-items: center; justify-content: center; transition: all 0.15s;
+    font-family: 'DM Mono', monospace;
+  }
+  .fm-close:hover { border-color: var(--accent); color: var(--text); }
+
+  .fm-search-wrap { padding: 1rem 1.75rem 0; }
+  .fm-search {
+    width: 100%; background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 0.6rem 1rem; font-family: 'Geologica', sans-serif;
+    font-size: 14px; color: var(--text); transition: border-color 0.2s, background 0.3s;
+    outline: none;
+  }
+  .fm-search:focus { border-color: var(--accent); }
+  .fm-search::placeholder { color: var(--text-dim); }
+
+  .fm-body { padding: 1.25rem 1.75rem 1.75rem; }
+  .fm-sec { margin-bottom: 1.75rem; }
+  .fm-sec.hidden { display: none; }
+  .fm-sec-title {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-dim); padding-bottom: 0.6rem; border-bottom: 1px solid var(--border);
+    margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem;
+    transition: border-color 0.3s;
+  }
+  .fm-sec-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .fm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+
+  .fm-card {
+    background: var(--bg2); border: 1px solid var(--border); border-radius: 9px;
+    padding: 0.85rem 1.05rem; transition: border-color 0.2s, background 0.3s;
+  }
+  .fm-card:hover { border-color: var(--border-hover); }
+  .fm-card.hidden { display: none; }
+
+  .fm-f {
+    font-family: 'DM Mono', monospace; font-size: 13.5px; font-weight: 500;
+    color: var(--green); background: var(--formula-bg);
+    display: inline-block; padding: 3px 8px; border-radius: 4px;
+    margin-bottom: 0.45rem; line-height: 1.55;
+  }
+  .fm-d { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+
+  .fm-no-results {
+    text-align: center; padding: 2rem; color: var(--text-dim);
+    font-family: 'DM Mono', monospace; font-size: 13px; display: none;
+  }
+
+  @media (max-width: 600px) {
+    .fm-grid { grid-template-columns: 1fr; }
+    .fm-body, .fm-search-wrap { padding-left: 1rem; padding-right: 1rem; }
+    .fm-head { padding: 1rem; }
+  }
+
 </style>
 </head>
 <body>
@@ -364,6 +451,7 @@
     <button class="ctrl-btn theme-btn" id="theme-toggle" onclick="toggleTheme()">☀️ Светлая тема</button>
     <button class="ctrl-btn" onclick="toggleAll(true)">Развернуть все</button>
     <button class="ctrl-btn" onclick="toggleAll(false)">Свернуть все</button>
+    <button class="ctrl-btn formula-btn" onclick="openFormulas()">📐 Формулы</button>
   </div>
 
   <div class="section-block">
@@ -2223,5 +2311,209 @@ function toggleAll(open) {
   });
 }
 </script>
+
+
+<!-- ===== Formula Modal ===== -->
+<div class="fm-overlay" id="fmOverlay" onclick="fmBgClose(event)">
+  <div class="fm-modal" id="fmModal">
+    <div class="fm-head">
+      <span class="fm-head-title">📐 Шпаргалка по формулам</span>
+      <span class="fm-head-count" id="fmCount"></span>
+      <button class="fm-close" onclick="closeFormulas()" title="Закрыть (Esc)">✕</button>
+    </div>
+    <div class="fm-search-wrap">
+      <input class="fm-search" id="fmSearch" type="text" placeholder="Поиск по формуле или определению…" oninput="fmFilter(this.value)">
+    </div>
+    <div class="fm-body" id="fmBody">
+      <!-- rendered by JS -->
+    </div>
+    <div class="fm-no-results" id="fmNoResults">Ничего не найдено</div>
+  </div>
+</div>
+
+<script>
+const FORMULAS = [
+  { section:"Механика", color:"var(--accent)", items:[
+    { f:"X = X₀ + Ut", d:"Равномерное прямолинейное движение. X — координата тела, X₀ — начальная координата, U — скорость, t — время." },
+    { f:"a = (U − U₀) / t", d:"Ускорение — векторная величина, характеризующая быстроту изменения скорости. U — конечная, U₀ — начальная скорость." },
+    { f:"U = U₀ + at", d:"Скорость при равноускоренном движении. U₀ — начальная скорость, a — ускорение, t — время." },
+    { f:"S = U₀t + (at²)/2", d:"Путь при равноускоренном движении. Альтернативно: S = (U² − U₀²) / (2a)." },
+    { f:"g = 9,8 м/с²", d:"Ускорение свободного падения. Одинаково для всех тел в отсутствие сопротивления воздуха." },
+    { f:"h = U₀t + (gt²)/2", d:"Высота при свободном падении. Также: U = U₀ + gt и h = (U² − U₀²) / (2g)." },
+    { f:"a = U²/R", d:"Центростремительное ускорение при движении по окружности. U — линейная скорость, R — радиус. Направлено к центру." },
+    { f:"T = t/N", d:"Период — время одного полного оборота. t — общее время, N — число оборотов." },
+    { f:"p = mU", d:"Импульс тела. Векторная величина, равная произведению массы m на скорость U. Направлен по скорости." },
+    { f:"a = F/m", d:"Второй закон Ньютона. Ускорение прямо пропорционально силе F и обратно пропорционально массе m." },
+    { f:"F₁₂ = −F₂₁", d:"Третий закон Ньютона. Силы взаимодействия двух тел равны по модулю и противоположны по направлению." },
+    { f:"Fтяж = mg", d:"Сила тяжести. m — масса тела, g — ускорение свободного падения." },
+    { f:"Fупр = k|x|", d:"Закон Гука. Сила упругости. k — жёсткость (пружины), x — величина деформации." },
+    { f:"P₁ + P₂ = const", d:"Закон сохранения импульса. Суммарный импульс замкнутой системы тел не изменяется." },
+    { f:"A = F·Δr·cos α", d:"Работа силы. Произведение модуля силы, модуля перемещения и косинуса угла между ними." },
+    { f:"N = A/t", d:"Мощность — работа, совершаемая за единицу времени. Измеряется в Ваттах (Вт)." },
+    { f:"Eк = (mU²)/2", d:"Кинетическая энергия тела. m — масса, U — скорость." },
+    { f:"Eп = mgh", d:"Потенциальная энергия в поле тяготения. h — высота над нулевым уровнем." },
+    { f:"Eп = (kx²)/2", d:"Потенциальная энергия упруго деформированного тела. k — жёсткость, x — деформация." },
+  ]},
+  { section:"МКТ и Термодинамика", color:"var(--purple)", items:[
+    { f:"Uск = √(3KT/m₀)", d:"Средняя квадратичная скорость молекул. K = 1,38·10⁻²³ Дж/К — постоянная Больцмана, T — абс. температура, m₀ — масса молекулы." },
+    { f:"ν = m/M = N/Nₐ", d:"Количество вещества. m — масса, M — молярная масса, N — число молекул, Nₐ — число Авогадро." },
+    { f:"Nₐ = 6,022·10²³ моль⁻¹", d:"Число Авогадро. Количество молекул в одном моле любого вещества." },
+    { f:"n = N/V", d:"Концентрация молекул — число молекул N в единице объёма V." },
+    { f:"P = nKT", d:"Давление идеального газа. Зависит от концентрации молекул n и абсолютной температуры T." },
+    { f:"Eпост = (3/2)KT", d:"Средняя кинетическая энергия поступательного движения молекул. Прямо пропорциональна абс. температуре T." },
+    { f:"T = t + 273", d:"Абсолютная температура (кельвины). t — температура в °C. Абсолютный нуль: 0 К = −273°C." },
+    { f:"(P₁V₁)/T₁ = (P₂V₂)/T₂", d:"Объединённый газовый закон. Для данной массы газа это отношение постоянно при любых изопроцессах." },
+    { f:"pV = (m/M)RT", d:"Уравнение Клапейрона–Менделеева. R = 8,31 Дж/(моль·К) — молярная газовая постоянная." },
+    { f:"P₁/T₁ = P₂/T₂  (V=const)", d:"Закон Шарля (изохорный). При постоянном объёме давление газа прямо пропорционально абс. температуре." },
+    { f:"V₁/T₁ = V₂/T₂  (P=const)", d:"Закон Гей-Люссака (изобарный). При постоянном давлении объём газа прямо пропорционален абс. температуре." },
+    { f:"P₁V₁ = P₂V₂  (T=const)", d:"Закон Бойля–Мариотта (изотермический). При постоянной температуре давление обратно пропорционально объёму." },
+    { f:"∑Qотд = ∑Qполуч", d:"Уравнение теплового баланса. Теплота, отданная телами, равна теплоте, полученной телами (без потерь)." },
+    { f:"Q = cmΔT", d:"Теплота при нагревании/охлаждении. c — удельная теплоёмкость, m — масса, ΔT — изменение температуры." },
+    { f:"A = PΔV = (m/M)RΔT", d:"Работа газа при изобарном процессе (P = const). ΔV — изменение объёма." },
+    { f:"R = 8,31 Дж/(моль·К)", d:"Молярная газовая постоянная. Работа одного моля газа при нагревании на 1 К при постоянном давлении." },
+    { f:"Q = ΔU + A", d:"Первое начало термодинамики. Теплота расходуется на рост внутренней энергии ΔU и совершение работы A. Изохорный: Q=ΔU. Изотермический: Q=A." },
+    { f:"Q=0 → A = −ΔU", d:"Адиабатный процесс. Без теплообмена. Работа совершается за счёт уменьшения внутренней энергии газа." },
+    { f:"η = (Q₁ − Q₂) / Q₁", d:"КПД теплового двигателя. Q₁ — теплота от нагревателя, Q₂ — теплота, отданная холодильнику." },
+    { f:"η = (T₁ − T₂) / T₁", d:"КПД идеальной тепловой машины (цикл Карно). T₁ — температура нагревателя, T₂ — холодильника (в кельвинах)." },
+    { f:"Q = rm", d:"Теплота парообразования/конденсации. r — удельная теплота парообразования (Дж/кг), m — масса вещества." },
+  ]},
+  { section:"Агрегатные состояния", color:"var(--green)", items:[
+    { f:"F = σ·l", d:"Сила поверхностного натяжения. σ — коэффициент поверхностного натяжения (Н/м), l — длина контура. Направлена по касательной к поверхности." },
+    { f:"h = (2σ) / (ρgR)", d:"Подъём жидкости в капилляре. σ — поверхностное натяжение, ρ — плотность, g — ускорение, R — радиус капилляра." },
+    { f:"Q = λm", d:"Теплота плавления/кристаллизации. λ — удельная теплота плавления (Дж/кг) — теплота для расплавления 1 кг при Tпл." },
+    { f:"l = l₀(1 + αΔT)", d:"Линейное расширение при нагревании. l₀ — начальная длина, α — коэффициент линейного расширения." },
+    { f:"V = V₀(1 + βΔT)", d:"Объёмное расширение при нагревании. V₀ — начальный объём, β — коэффициент объёмного расширения." },
+  ]},
+  { section:"Электростатика", color:"var(--coral)", items:[
+    { f:"q₁ + q₂ + … = const", d:"Закон сохранения электрического заряда. В замкнутой системе сумма зарядов постоянна." },
+    { f:"F = K·q₁q₂ / r²", d:"Закон Кулона. Сила взаимодействия точечных зарядов. K = 9·10⁹ Н·м²/Кл²." },
+    { f:"ε₀ = 8,85·10⁻¹² Кл²/(Н·м²)", d:"Электрическая постоянная — диэлектрическая проницаемость вакуума. Входит в формулы электрического поля." },
+    { f:"E = F/q", d:"Напряжённость электрического поля. Сила, действующая на единичный положительный заряд. Единица — В/м." },
+    { f:"σ = q/S", d:"Поверхностная плотность заряда. Отношение заряда q к площади поверхности S." },
+    { f:"A = E·q·d", d:"Работа электрического поля. E — напряжённость однородного поля, q — заряд, d — перемещение вдоль поля." },
+    { f:"φ = Eп/q", d:"Потенциал электрического поля. Отношение потенциальной энергии заряда к его величине." },
+    { f:"φ = q / (4πεε₀r)", d:"Потенциал поля точечного заряда. r — расстояние до заряда, ε — диэлектрическая проницаемость среды." },
+    { f:"A = qU", d:"Работа при перемещении заряда q между точками с разностью потенциалов U (напряжением)." },
+    { f:"E = U/d", d:"Связь напряжённости с напряжением для однородного поля. U — напряжение между пластинами, d — расстояние." },
+    { f:"C = q/φ", d:"Электроёмкость проводника. Характеризует способность накапливать заряд. Единица — Фарад (Ф)." },
+    { f:"C = (εε₀S) / d", d:"Электроёмкость плоского конденсатора. S — площадь пластины, d — расстояние между пластинами, ε — диэлектрическая проницаемость." },
+    { f:"W = (CU²) / 2", d:"Энергия электрического поля конденсатора. C — ёмкость, U — напряжение между обкладками." },
+  ]},
+  { section:"Постоянный ток", color:"var(--amber)", items:[
+    { f:"I = q/t", d:"Сила тока — заряд q, проходящий через сечение за время t. Единица — Ампер (А)." },
+    { f:"J = I/S", d:"Плотность тока. Отношение силы тока I к площади поперечного сечения проводника S." },
+    { f:"I = U/R", d:"Закон Ома для участка цепи. Сила тока прямо пропорциональна напряжению и обратно — сопротивлению." },
+    { f:"R = (ρ·l) / S", d:"Электрическое сопротивление. ρ — удельное сопротивление (Ом·м), l — длина, S — площадь сечения." },
+    { f:"R = R₀(1 + αΔT)", d:"Зависимость сопротивления металла от температуры. α — температурный коэффициент сопротивления." },
+    { f:"Rпосл = R₁ + R₂", d:"Последовательное соединение. Ток одинаков (I = const), сопротивления складываются." },
+    { f:"1/Rпар = 1/R₁ + 1/R₂", d:"Параллельное соединение. Напряжение одинаково (U = const), обратные сопротивления складываются." },
+    { f:"A = IUt = I²Rt", d:"Работа электрического тока. I — ток, U — напряжение, t — время, R — сопротивление." },
+    { f:"P = IU = I²R", d:"Мощность электрического тока — работа за единицу времени. Единица — Ватт (Вт)." },
+    { f:"Q = I²·R·t", d:"Закон Джоуля–Ленца. Теплота, выделяемая проводником при прохождении тока." },
+    { f:"I = ε / (R + r)", d:"Закон Ома для полной цепи. ε — ЭДС источника, r — его внутреннее сопротивление." },
+    { f:"Iзк = ε/r", d:"Ток короткого замыкания. Максимальный ток при R = 0 (замыкание без нагрузки)." },
+    { f:"m = kIt", d:"Закон Фарадея для электролиза. Масса вещества m на электроде пропорциональна току I и времени t. k — электрохимический эквивалент." },
+    { f:"I = (n·ε) / (R + n·r)", d:"Последовательное соединение n источников тока." },
+    { f:"I = ε / (R + r/m)", d:"Параллельное соединение m источников тока." },
+  ]},
+  { section:"Магнетизм и ЭМИ", color:"var(--purple)", items:[
+    { f:"B = μμ₀H", d:"Магнитная индукция B и напряжённость H. μ — проницаемость среды, μ₀ = 4π·10⁻⁷ Гн/м — магнитная постоянная." },
+    { f:"F = B·I·l·sin α", d:"Сила Ампера. Действует на проводник с током I в магнитном поле. l — длина, α — угол между I и B. Правило левой руки." },
+    { f:"F = Bqv·sin α", d:"Сила Лоренца. Действует на движущийся заряд q в магнитном поле. v — скорость, меняет только направление скорости." },
+    { f:"ε = Bvl·sin α", d:"ЭДС индукции при движении проводника в МП. B — индукция, v — скорость проводника, l — длина. Правило правой руки." },
+    { f:"ε = −ΔФ/Δt", d:"Закон Фарадея (ЭМИ). ЭДС пропорциональна скорости изменения магнитного потока. Знак «−» — правило Ленца." },
+    { f:"ε = L(ΔI/Δt)", d:"ЭДС самоиндукции. L — индуктивность катушки (Гн), ΔI/Δt — скорость изменения тока." },
+    { f:"Ф = BS·cos α", d:"Магнитный поток. B — индукция, S — площадь контура, α — угол между B и нормалью к контуру." },
+    { f:"W = (LI²) / 2", d:"Энергия магнитного поля катушки. L — индуктивность, I — сила тока." },
+  ]},
+  { section:"Колебания. Переменный ток", color:"var(--blue)", items:[
+    { f:"T = 2π√(LC)", d:"Формула Томсона. Период электромагнитных колебаний контура. L — индуктивность, C — ёмкость конденсатора." },
+    { f:"P = IU·cos φ", d:"Мощность переменного тока. I, U — действующие значения. cos φ — коэффициент мощности, φ — угол сдвига фаз." },
+    { f:"XL = ωL", d:"Индуктивное сопротивление. ω — циклическая частота, L — индуктивность. Напряжение опережает ток на 90°." },
+    { f:"XC = 1/(ωC)", d:"Ёмкостное сопротивление. ω — циклическая частота, C — ёмкость. Ток опережает напряжение на 90°." },
+  ]},
+  { section:"Оптика", color:"var(--accent)", items:[
+    { f:"n = c/v", d:"Абсолютный показатель преломления. c — скорость света в вакууме, v — в данной среде. Показывает, во сколько раз свет замедляется." },
+    { f:"D = 1/F", d:"Оптическая сила линзы. F — фокусное расстояние (м). Единица — диоптрия (дптр). D > 0 — собирающая, D < 0 — рассеивающая." },
+    { f:"d·sin φ = k·λ", d:"Условие максимумов дифракционной решётки. d — период, φ — угол дифракции, k — порядок максимума, λ — длина волны." },
+  ]},
+  { section:"Теория относительности и квантовая физика", color:"var(--green)", items:[
+    { f:"E = mc²", d:"Закон Эйнштейна. Полная энергия свободного тела пропорциональна его массе. c ≈ 3·10⁸ м/с — скорость света в вакууме." },
+    { f:"E = hν", d:"Квантовая гипотеза Планка. Атомы излучают энергию порциями — квантами. h = 6,626·10⁻³⁴ Дж·с — постоянная Планка, ν — частота." },
+    { f:"p = h/λ", d:"Импульс фотона. h — постоянная Планка, λ — длина волны. Фотон не имеет массы покоя, но обладает импульсом." },
+    { f:"hν = Aвых + Ek", d:"Уравнение Эйнштейна для фотоэффекта. Энергия фотона идёт на работу выхода электрона и его кинетическую энергию." },
+    { f:"Eсв = ΔM·c²", d:"Энергия связи ядра. ΔM — дефект масс (разность масс нуклонов и ядра). Чем больше энергия связи, тем устойчивее ядро." },
+    { f:"N = N₀·2^(−t/T)", d:"Закон радиоактивного распада. N₀ — начальное число ядер, T — период полураспада, t — прошедшее время." },
+  ]},
+  { section:"Дополнения", color:"var(--text-dim)", items:[
+    { f:"Q = I²Rt", d:"Потери при передаче энергии. Для уменьшения нагрева проводов напряжение повышают трансформаторами, уменьшая ток." },
+    { f:"v = v' + V", d:"Классический закон сложения скоростей. v — скорость относительно неподвижной СО, v' — относительно подвижной, V — скорость подвижной СО." },
+  ]},
+];
+
+let fmBuilt = false;
+const totalFormulas = FORMULAS.reduce((s,sec)=>s+sec.items.length,0);
+
+function buildFormulaModal() {
+  if (fmBuilt) return;
+  fmBuilt = true;
+  document.getElementById('fmCount').textContent = totalFormulas + ' формул';
+  const body = document.getElementById('fmBody');
+  body.innerHTML = FORMULAS.map((sec, si) => `
+    <div class="fm-sec" id="fmSec${si}">
+      <div class="fm-sec-title">
+        <span class="fm-sec-dot" style="background:${sec.color}"></span>
+        ${sec.section}
+      </div>
+      <div class="fm-grid">
+        ${sec.items.map((item, ii) => `
+          <div class="fm-card" id="fmCard${si}_${ii}" data-f="${item.f.toLowerCase()}" data-d="${item.d.toLowerCase()}">
+            <div class="fm-f">${item.f}</div>
+            <div class="fm-d">${item.d}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('') + '<div class="fm-no-results" id="fmNoResults2" style="display:none">Ничего не найдено</div>';
+}
+
+function openFormulas() {
+  buildFormulaModal();
+  document.getElementById('fmSearch').value = '';
+  fmFilter('');
+  document.getElementById('fmOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => document.getElementById('fmSearch').focus(), 200);
+}
+function closeFormulas() {
+  document.getElementById('fmOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function fmBgClose(e) {
+  if (e.target === document.getElementById('fmOverlay')) closeFormulas();
+}
+function fmFilter(q) {
+  const t = q.trim().toLowerCase();
+  let anyVisible = false;
+  FORMULAS.forEach((sec, si) => {
+    let secVisible = false;
+    sec.items.forEach((item, ii) => {
+      const card = document.getElementById('fmCard'+si+'_'+ii);
+      if (!card) return;
+      const match = !t || card.dataset.f.includes(t) || card.dataset.d.includes(t);
+      card.classList.toggle('hidden', !match);
+      if (match) { secVisible = true; anyVisible = true; }
+    });
+    const secEl = document.getElementById('fmSec'+si);
+    if (secEl) secEl.classList.toggle('hidden', !secVisible);
+  });
+  const noRes = document.getElementById('fmNoResults2');
+  if (noRes) noRes.style.display = anyVisible ? 'none' : 'block';
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.getElementById('fmOverlay').classList.contains('open')) closeFormulas();
+});
+</script>
+
 </body>
 </html>
