@@ -20,23 +20,22 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            cursor: crosshair; /* Киберпанк-курсор */
+            cursor: crosshair;
         }
 
         body {
             background-color: var(--bg-viewport);
             color: var(--text-main);
-            font-family: 'JetBrains Mono', Consolas, Monaco, monospace; /* Везде моноширинный */
+            font-family: 'JetBrains Mono', Consolas, Monaco, monospace;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
-            overflow: hidden; /* Партиклы не вылезут */
+            overflow: hidden;
             position: relative;
         }
 
-        /* 5. Scanline Effect (Фоновая полоса) */
         body::before {
             content: "";
             position: absolute;
@@ -50,14 +49,13 @@
             pointer-events: none;
         }
 
-        /* 4. Cyber Border & Card */
         .cyber-card {
             width: 100%;
             max-width: 680px;
             background: var(--bg-card);
-            border-radius: 4px; /* Прямоугольнее */
+            border-radius: 4px;
             position: relative;
-            padding: 4px; /* Отступ для неона */
+            padding: 4px;
             overflow: hidden;
             box-shadow: 0 0 50px -10px rgba(0,0,0,0.8);
             transform: translateY(20px) scale(0.95);
@@ -65,7 +63,6 @@
             animation: cardEntrance 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards 0.2s;
         }
 
-        /* Neon Border Animation */
         .cyber-card::before {
             content: "";
             position: absolute;
@@ -85,7 +82,6 @@
             overflow: hidden;
         }
 
-        /* 3. Techno Particles (pseudo-elements) */
         .card-inner::before, .card-inner::after {
             content: "{} [] // 01";
             position: absolute;
@@ -116,7 +112,6 @@
             animation: flickerIcon 1.5s infinite;
         }
 
-        /* 1. Glitch Header */
         h1.glitch {
             font-size: 36px;
             font-weight: 700;
@@ -135,7 +130,6 @@
             background: var(--bg-card);
         }
 
-        /* Красный слой сбоя */
         h1.glitch::before {
             left: 2px;
             text-shadow: -2px 0 var(--glitch-red);
@@ -143,155 +137,8 @@
             animation: glitchAnim 3s infinite linear alternate-reverse;
         }
 
-        /* Синий слой сбоя */
         h1.glitch::after {
             left: -2px;
             text-shadow: -2px 0 var(--glitch-blue);
             clip: rect(85px, 450px, 140px, 0);
-            animation: glitchAnim2 2s infinite linear alternate-reverse;
-        }
-
-        /* Glitch triggers on Hover too */
-        h1.glitch:hover::before { animation-duration: 0.5s; }
-        h1.glitch:hover::after { animation-duration: 0.3s; }
-
-        /* 2. Scramble Date/Time */
-        .scramble-date {
-            color: var(--accent-yellow);
-            font-weight: 500;
-            text-shadow: 0 0 15px var(--accent-glow);
-            position: relative;
-        }
-
-        .footer-panel {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 16px 20px;
-            background: rgba(0,0,0,0.4);
-            border: 1px solid var(--border-muted);
-            font-size: 13px;
-            margin-top: 20px;
-        }
-
-        .timer-label { color: #8b8b93; }
-        .timer-value {
-            color: var(--accent-yellow);
-            animation: timerPulse 2s infinite;
-        }
-
-        /* --- Keyframes Animations --- */
-        @keyframes rotateBorder { to { transform: rotate(360deg); } }
-        @keyframes scanline { to { top: 100%; } }
-        @keyframes particlesFloat {
-            0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translate(100px, -50px) rotate(360deg); opacity: 0; }
-        }
-        @keyframes cardEntrance { to { opacity: 1; transform: translateY(0) scale(1); } }
-        @keyframes flickerIcon { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } 52% { opacity: 1; } 54% { opacity: 0.2; } 55% { opacity: 1; } }
-        
-        @keyframes glitchAnim {
-            0% { clip: rect(10px, 9999px, 20px, 0); }
-            /* ... много стадий для рваного сбоя ... */
-            100% { clip: rect(80px, 9999px, 100px, 0); }
-        }
-        @keyframes glitchAnim2 {
-            0% { clip: rect(50px, 9999px, 60px, 0); }
-            100% { clip: rect(10px, 9999px, 30px, 0); }
-        }
-        /* Упрощенные glitch keyframes для краткости примера кода */
-        @keyframes glitchAnim { 0% { clip: rect(31px, 999px, 39px, 0); transform: skew(0.5turn); } 10% { clip: rect(93px, 999px, 99px, 0); transform: skew(0.1turn); } 20% { clip: rect(2px, 999px, 7px, 0); transform: skew(0.3turn); } 30% { clip: rect(65px, 999px, 69px, 0); transform: skew(0.5turn); } 40% { clip: rect(90px, 999px, 95px, 0); transform: skew(0.1turn); } 50% { clip: rect(14px, 999px, 20px, 0); transform: skew(0.3turn); } 60% { clip: rect(72px, 999px, 78px, 0); transform: skew(0.5turn); } 70% { clip: rect(81px, 999px, 89px, 0); transform: skew(0.1turn); } 80% { clip: rect(20px, 999px, 28px, 0); transform: skew(0.3turn); } 90% { clip: rect(55px, 999px, 61px, 0); transform: skew(0.5turn); } 100% { clip: rect(4px, 999px, 10px, 0); transform: skew(0.1turn); } }
-        @keyframes glitchAnim2 { 0% { clip: rect(91px, 999px, 99px, 0); transform: skew(0.2turn); } 10% { clip: rect(3px, 999px, 9px, 0); transform: skew(0.4turn); } 20% { clip: rect(50px, 999px, 58px, 0); transform: skew(0.6turn); } 30% { clip: rect(15px, 999px, 21px, 0); transform: skew(0.8turn); } 40% { clip: rect(82px, 999px, 88px, 0); transform: skew(0.2turn); } 50% { clip: rect(61px, 999px, 69px, 0); transform: skew(0.4turn); } 60% { clip: rect(24px, 999px, 30px, 0); transform: skew(0.6turn); } 70% { clip: rect(95px, 999px, 99px, 0); transform: skew(0.8turn); } 80% { clip: rect(40px, 999px, 48px, 0); transform: skew(0.2turn); } 90% { clip: rect(71px, 999px, 79px, 0); transform: skew(0.4turn); } 100% { clip: rect(2px, 999px, 10px, 0); transform: skew(0.6turn); } }
-
-        @keyframes timerPulse { 0%, 100% { opacity: 1; text-shadow: 0 0 15px var(--accent-glow); } 50% { opacity: 0.6; text-shadow: 0 0 5px var(--accent-glow); } }
-
-        @media (max-width: 500px) { h1.glitch { font-size: 26px; } .card-inner { padding: 30px 20px; } }
-    </style>
-</head>
-<body>
-
-    <div class="cyber-card">
-        <div class="card-inner">
-            <div class="badge">
-                <span class="badge-icon">⚠️</span>
-                <span>ответы на экзамен по физике</span>
-            </div>
-            
-            <h1 class="glitch" data-text="ТЕХНИЧЕСКИЕ РАБОТЫ ДО">
-                ТЕХНИЧЕСКИЕ РАБОТЫ ДО <br>
-                <span class="scramble-date" id="scramble-target">24.06.2026 15:00</span>
-            </h1>
-
-            <div class="footer-panel">
-                <span class="timer-label">Доступ откроется через:</span>
-                <span class="timer-value" id="live-timer">вычисление...</span>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // --- 1. Scramble Текста на загрузке ---
-        function scrambleText(element) {
-            const finalText = element.textContent;
-            const chars = '0123456789/?_-%$@#!XYZ';
-            const duration = 40; // Скорость смены символа (мс)
-            let currentIteration = 0;
-
-            const interval = setInterval(() => {
-                element.textContent = finalText
-                    .split('')
-                    .map((char, index) => {
-                        if (index < currentIteration) return char; // Оставляем правильную букву
-                        if (char === ' ' || char === '.') return char; // Не трогаем пробелы и точки
-                        return chars[Math.floor(Math.random() * chars.length)]; // Случайный символ
-                    })
-                    .join('');
-
-                if (currentIteration >= finalText.length) {
-                    clearInterval(interval);
-                    element.textContent = finalText; // Гарантируем чистый финал
-                }
-                currentIteration += finalText.length / 50; // Плавно увеличиваем кол-во правильных букв
-            }, duration);
-        }
-
-        // --- 2. Живой Таймер (старый код) ---
-        function initCountdown() {
-            const targetDate = new Date(2026, 5, 22, 15, 0, 0).getTime();
-            const timerElement = document.getElementById('live-timer');
-
-            function tick() {
-                const now = new Date().getTime();
-                const distance = targetDate - now;
-
-                if (distance < 0) {
-                    timerElement.style.color = '#61c554';
-                    timerElement.style.textShadow = 'none';
-                    timerElement.textContent = 'Доступ открыт';
-                    return;
-                }
-
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                const pad = (num) => String(num).padStart(2, '0');
-                timerElement.textContent = `${days}д : ${pad(hours)}ч : ${pad(minutes)}м : ${pad(seconds)}с`;
-            }
-
-            tick();
-            setInterval(tick, 1000);
-        }
-
-        // Запуск всего при загрузке
-        document.addEventListener('DOMContentLoaded', () => {
-            scrambleText(document.getElementById('scramble-target'));
-            initCountdown();
-        });
-    </script>
-
-</body>
-</html>
+            animation: glitchAnim
