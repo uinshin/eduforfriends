@@ -141,4 +141,129 @@
             left: -2px;
             text-shadow: -2px 0 var(--glitch-blue);
             clip: rect(85px, 450px, 140px, 0);
-            animation: glitchAnim
+            animation: glitchAnim2 2s infinite linear alternate-reverse;
+        }
+
+        .scramble-date {
+            color: var(--accent-yellow);
+            font-weight: 500;
+            text-shadow: 0 0 15px var(--accent-glow);
+            position: relative;
+        }
+
+        .footer-panel {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--border-muted);
+            font-size: 13px;
+            margin-top: 20px;
+        }
+
+        .timer-label { color: #8b8b93; }
+        .timer-value {
+            color: var(--accent-yellow);
+            animation: timerPulse 2s infinite;
+        }
+
+        @keyframes rotateBorder { to { transform: rotate(360deg); } }
+        @keyframes scanline { to { top: 100%; } }
+        @keyframes particlesFloat {
+            0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translate(100px, -50px) rotate(360deg); opacity: 0; }
+        }
+        @keyframes cardEntrance { to { opacity: 1; transform: translateY(0) scale(1); } }
+        @keyframes flickerIcon { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } 52% { opacity: 1; } 54% { opacity: 0.2; } 55% { opacity: 1; } }
+        @keyframes glitchAnim { 0% { clip: rect(31px, 999px, 39px, 0); transform: skew(0.5turn); } 100% { clip: rect(4px, 999px, 10px, 0); transform: skew(0.1turn); } }
+        @keyframes glitchAnim2 { 0% { clip: rect(91px, 999px, 99px, 0); transform: skew(0.2turn); } 100% { clip: rect(2px, 999px, 10px, 0); transform: skew(0.6turn); } }
+        @keyframes timerPulse { 0%, 100% { opacity: 1; text-shadow: 0 0 15px var(--accent-glow); } 50% { opacity: 0.6; text-shadow: 0 0 5px var(--accent-glow); } }
+
+        @media (max-width: 500px) { h1.glitch { font-size: 26px; } .card-inner { padding: 30px 20px; } }
+    </style>
+</head>
+<body>
+
+    <div class="cyber-card">
+        <div class="card-inner">
+            <div class="badge">
+                <span class="badge-icon">⚠️</span>
+                <span>ответы на экзамен по физике</span>
+            </div>
+            
+            <h1 class="glitch" data-text="ТЕХНИЧЕСКИЕ РАБОТЫ ДО">
+                ТЕХНИЧЕСКИЕ РАБОТЫ ДО <br>
+                <span class="scramble-date" id="scramble-target">24.06.2026 14:00</span>
+            </h1>
+
+            <div class="footer-panel">
+                <span class="timer-label">Доступ откроется через:</span>
+                <span class="timer-value" id="live-timer">вычисление...</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function scrambleText(element) {
+            const finalText = element.textContent;
+            const chars = '0123456789/?_-%$@#!XYZ';
+            const duration = 40;
+            let currentIteration = 0;
+
+            const interval = setInterval(() => {
+                element.textContent = finalText
+                    .split('')
+                    .map((char, index) => {
+                        if (index < currentIteration) return char;
+                        if (char === ' ' || char === '.') return char;
+                        return chars[Math.floor(Math.random() * chars.length)];
+                    })
+                    .join('');
+
+                if (currentIteration >= finalText.length) {
+                    clearInterval(interval);
+                    element.textContent = finalText;
+                }
+                currentIteration += finalText.length / 50;
+            }, duration);
+        }
+
+        function initCountdown() {
+            // Установлено: 24 июня 2026 года, 14:00
+            const targetDate = new Date(2026, 5, 24, 14, 0, 0).getTime();
+            const timerElement = document.getElementById('live-timer');
+
+            function tick() {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
+
+                if (distance < 0) {
+                    timerElement.style.color = '#61c554';
+                    timerElement.style.textShadow = 'none';
+                    timerElement.textContent = 'Доступ открыт';
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                const pad = (num) => String(num).padStart(2, '0');
+                timerElement.textContent = `${days}д : ${pad(hours)}ч : ${pad(minutes)}м : ${pad(seconds)}с`;
+            }
+
+            tick();
+            setInterval(tick, 1000);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            scrambleText(document.getElementById('scramble-target'));
+            initCountdown();
+        });
+    </script>
+</body>
+</html>
