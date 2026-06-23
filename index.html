@@ -454,9 +454,237 @@ mark{
 .stub-card { border-style: dashed !important; }
 .stub-card .card-header { background: color-mix(in srgb, var(--bg3) 94%, #e53935 6%); }
 .stub-card .item-text { font-style: italic; color: var(--text3); }
+
+/* ═══════════════════ TICKET OVERLAY ═══════════════════ */
+.ticket-overlay {
+  position: fixed; inset: 0;
+  background: rgba(10,12,26,.82);
+  backdrop-filter: blur(6px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.ticket-overlay.hidden { display: none; }
+
+.ticket-modal {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 40px 36px 32px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 24px 80px rgba(0,0,0,.4);
+  text-align: center;
+  animation: tm-in .25s ease;
+}
+@keyframes tm-in {
+  from { opacity:0; transform: translateY(20px) scale(.97); }
+  to   { opacity:1; transform: none; }
+}
+.ticket-icon { font-size: 2.8rem; margin-bottom: 12px; }
+.ticket-modal h2 {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 8px;
+  line-height: 1.3;
+}
+.ticket-modal p {
+  color: var(--text3);
+  font-size: .88rem;
+  margin: 0 0 18px;
+}
+.ticket-example {
+  display: inline-block;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 5px 12px;
+  font-size: .8rem;
+  color: var(--text2);
+  margin-bottom: 18px;
+  font-family: monospace;
+  letter-spacing: .02em;
+}
+.ticket-input-wrap {
+  position: relative;
+  margin-bottom: 14px;
+}
+.ticket-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 16px;
+  font-size: 1.05rem;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  outline: none;
+  transition: border-color .2s;
+  text-align: center;
+}
+.ticket-input:focus { border-color: #4a7fd4; }
+.ticket-input::placeholder { color: var(--text3); }
+
+.ticket-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+  min-height: 28px;
+  margin-bottom: 20px;
+}
+.ticket-chip {
+  background: #1e3a6e;
+  color: #93b8f5;
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-size: .78rem;
+  font-weight: 600;
+}
+[data-theme="dark"] .ticket-chip { background: #1e2e50; color: #7eb0f5; }
+.ticket-chip.missing { background: #3d1515; color: #f08080; }
+
+.ticket-btn-row {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}
+.btn-apply {
+  padding: 13px 20px;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: background .15s, transform .1s;
+}
+.btn-apply:hover { background: #1d4ed8; }
+.btn-apply:active { transform: scale(.98); }
+.btn-apply:disabled { background: #94a3b8; cursor: default; }
+.btn-showall {
+  padding: 10px 20px;
+  background: transparent;
+  color: var(--text3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: .88rem;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: background .15s;
+}
+.btn-showall:hover { background: var(--bg3); color: var(--text2); }
+
+/* ─── filter banner ─── */
+.filter-banner {
+  background: linear-gradient(135deg, #1e3a6e 0%, #1e2d5a 100%);
+  color: #cde0ff;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .83rem;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 48px;
+  z-index: 100;
+  border-bottom: 1px solid #2a4a90;
+}
+[data-theme="dark"] .filter-banner { background: linear-gradient(135deg,#0d1f45,#0a1530); border-color:#1a2d60; }
+.filter-banner-label { font-weight: 600; white-space: nowrap; }
+.filter-banner-nums { flex: 1; opacity: .85; font-family: monospace; font-size: .8rem; }
+.filter-banner-count {
+  background: rgba(255,255,255,.15);
+  border-radius: 20px;
+  padding: 2px 9px;
+  font-weight: 700;
+  white-space: nowrap;
+  font-size: .78rem;
+}
+.filter-banner-btns { display: flex; gap: 6px; }
+.fbtn {
+  padding: 4px 11px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,.25);
+  background: rgba(255,255,255,.1);
+  color: #cde0ff;
+  font-size: .78rem;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: background .15s;
+}
+.fbtn:hover { background: rgba(255,255,255,.2); }
+.fbtn.fbtn-reset { border-color: rgba(255,100,100,.4); color: #ffaaaa; }
+.fbtn.fbtn-reset:hover { background: rgba(255,80,80,.15); }
+
+/* ─── topbar tickets button ─── */
+.tickets-topbar-btn {
+  padding: 5px 12px;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  font-size: .78rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: background .15s;
+  white-space: nowrap;
+}
+.tickets-topbar-btn:hover { background: #1d4ed8; }
+
+/* ─── exam mode: more compact ─── */
+body.exam-mode .hero { display: none; }
+body.exam-mode .chapter-header { padding: 8px 16px; }
+body.exam-mode .card { margin-bottom: 8px; }
+body.exam-mode .card-body { padding: 10px 14px; }
+body.exam-mode .item-text { font-size: .82rem; }
+body.exam-mode .chapters-wrap { padding: 10px 16px; }
+
+@media(max-width:700px) {
+  .ticket-modal { padding: 28px 20px 24px; }
+  .filter-banner { top: 44px; }
+}
 </style>
 </head>
 <body>
+
+<!-- ══════════ TICKET SELECTOR OVERLAY ══════════ -->
+<div id="ticket-overlay" class="ticket-overlay">
+  <div class="ticket-modal">
+    <div class="ticket-icon">🎫</div>
+    <h2>Какие билеты вам нужны?</h2>
+    <p>Введите номера вопросов — через запятую, пробел или диапазон</p>
+    <div class="ticket-example">Например: 5, 12, 23-25, 38</div>
+    <div class="ticket-input-wrap">
+      <input class="ticket-input" id="ticket-input"
+             type="text" placeholder="5, 12, 23-25, 38…"
+             autocomplete="off" autocorrect="off" spellcheck="false">
+    </div>
+    <div class="ticket-chips" id="ticket-chips"></div>
+    <div class="ticket-btn-row">
+      <button class="btn-apply" id="btn-apply" disabled>Показать выбранные →</button>
+      <button class="btn-showall" id="btn-showall">Показать все вопросы</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ FILTER BANNER ══════════ -->
+<div class="filter-banner" id="filter-banner" style="display:none">
+  <span class="filter-banner-label">🎫 Билеты:</span>
+  <span class="filter-banner-nums" id="filter-banner-nums"></span>
+  <span class="filter-banner-count" id="filter-banner-count"></span>
+  <div class="filter-banner-btns">
+    <button class="fbtn" id="fbtn-change">Изменить</button>
+    <button class="fbtn fbtn-reset" id="fbtn-reset">Сбросить</button>
+  </div>
+</div>
 <div class="layout">
 
 <!-- SIDEBAR -->
@@ -494,6 +722,7 @@ mark{
         <span class="search-icon">🔍</span>
         <input class="search-input" id="search" type="search" placeholder="Поиск по конспекту…" autocomplete="off">
       </div>
+      <button class="tickets-topbar-btn" id="tickets-topbar-btn">🎫 Билеты</button>
       <button class="theme-btn" id="theme-btn" title="Сменить тему">🌙</button>
     </div>
   </header>
@@ -2985,6 +3214,173 @@ const obs = new IntersectionObserver((entries)=>{
 },{rootMargin:'-20% 0px -70% 0px'});
 chapterEls.forEach(el=>obs.observe(el));
 document.getElementById('nuclear') && obs.observe(document.getElementById('nuclear'));
+
+// ══════════════════ TICKET SYSTEM ══════════════════
+
+const VALID_NUMS = new Set(ITEMS.map(it => it.num));
+
+function parseTickets(str) {
+  const nums = new Set();
+  str.replace(/，/g,',').split(/[,\s;|]+/).forEach(part => {
+    part = part.trim();
+    if (!part) return;
+    const range = part.match(/^(\d+)[\-–—](\d+)$/);
+    if (range) {
+      const a = parseInt(range[1]), b = parseInt(range[2]);
+      for (let i = Math.min(a,b); i <= Math.max(a,b); i++) nums.add(i);
+    } else {
+      const n = parseInt(part);
+      if (!isNaN(n) && n > 0) nums.add(n);
+    }
+  });
+  return [...nums].sort((a,b) => a-b);
+}
+
+function renderChips(nums) {
+  const el = document.getElementById('ticket-chips');
+  el.innerHTML = '';
+  if (!nums.length) return;
+  nums.forEach(n => {
+    const chip = document.createElement('span');
+    chip.className = 'ticket-chip' + (VALID_NUMS.has(n) ? '' : ' missing');
+    chip.textContent = n;
+    chip.title = VALID_NUMS.has(n) ? '' : 'Вопроса ' + n + ' нет в базе';
+    el.appendChild(chip);
+  });
+}
+
+document.getElementById('ticket-input').addEventListener('input', function() {
+  const nums = parseTickets(this.value);
+  renderChips(nums);
+  const valid = nums.filter(n => VALID_NUMS.has(n));
+  const btn = document.getElementById('btn-apply');
+  btn.disabled = valid.length === 0;
+  btn.textContent = valid.length
+    ? `Показать ${valid.length} ${pluralQ(valid.length)} →`
+    : 'Введите номера вопросов';
+});
+
+document.getElementById('ticket-input').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') {
+    const btn = document.getElementById('btn-apply');
+    if (!btn.disabled) btn.click();
+  }
+  if (e.key === 'Escape') closeOverlay();
+});
+
+document.getElementById('btn-apply').addEventListener('click', function() {
+  const raw = document.getElementById('ticket-input').value;
+  const nums = parseTickets(raw).filter(n => VALID_NUMS.has(n));
+  if (!nums.length) return;
+  applyFilter(nums);
+  closeOverlay();
+  localStorage.setItem('physics-tickets', JSON.stringify(nums));
+});
+
+document.getElementById('btn-showall').addEventListener('click', function() {
+  clearFilter();
+  closeOverlay();
+  localStorage.removeItem('physics-tickets');
+});
+
+document.getElementById('tickets-topbar-btn').addEventListener('click', openOverlay);
+
+document.getElementById('fbtn-change').addEventListener('click', function() {
+  const saved = JSON.parse(localStorage.getItem('physics-tickets') || '[]');
+  document.getElementById('ticket-input').value = saved.join(', ');
+  renderChips(saved);
+  const btn = document.getElementById('btn-apply');
+  btn.disabled = saved.length === 0;
+  btn.textContent = saved.length
+    ? `Показать ${saved.length} ${pluralQ(saved.length)} →`
+    : 'Введите номера вопросов';
+  openOverlay();
+});
+
+document.getElementById('fbtn-reset').addEventListener('click', function() {
+  clearFilter();
+  localStorage.removeItem('physics-tickets');
+});
+
+function openOverlay() {
+  document.getElementById('ticket-overlay').classList.remove('hidden');
+  setTimeout(() => document.getElementById('ticket-input').focus(), 50);
+}
+
+function closeOverlay() {
+  document.getElementById('ticket-overlay').classList.add('hidden');
+}
+
+// click outside modal closes it
+document.getElementById('ticket-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeOverlay();
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeOverlay();
+});
+
+function applyFilter(nums) {
+  const numSet = new Set(nums);
+  document.body.classList.add('exam-mode');
+
+  // hide/show individual cards
+  document.querySelectorAll('.card[id^="item-"]').forEach(card => {
+    const n = parseInt(card.id.replace('item-', ''));
+    card.style.display = numSet.has(n) ? '' : 'none';
+  });
+
+  // hide chapters with no visible cards
+  document.querySelectorAll('.chapter').forEach(ch => {
+    const visible = [...ch.querySelectorAll('.card[id^="item-"]')]
+      .some(c => c.style.display !== 'none');
+    ch.style.display = visible ? '' : 'none';
+  });
+
+  // update banner
+  const banner = document.getElementById('filter-banner');
+  document.getElementById('filter-banner-nums').textContent = nums.join(', ');
+  document.getElementById('filter-banner-count').textContent =
+    nums.length + ' ' + pluralQ(nums.length);
+  banner.style.display = '';
+
+  // scroll to top
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function clearFilter() {
+  document.body.classList.remove('exam-mode');
+  document.querySelectorAll('.card[id^="item-"]').forEach(c => c.style.display = '');
+  document.querySelectorAll('.chapter').forEach(ch => ch.style.display = '');
+  document.getElementById('filter-banner').style.display = 'none';
+}
+
+function pluralQ(n) {
+  if (n % 10 === 1 && n % 100 !== 11) return 'вопрос';
+  if ([2,3,4].includes(n % 10) && ![12,13,14].includes(n % 100)) return 'вопроса';
+  return 'вопросов';
+}
+
+// ─── restore last session ───
+(function() {
+  const saved = localStorage.getItem('physics-tickets');
+  if (saved) {
+    try {
+      const nums = JSON.parse(saved);
+      if (Array.isArray(nums) && nums.length) {
+        // pre-fill input and hide overlay
+        document.getElementById('ticket-input').value = nums.join(', ');
+        renderChips(nums);
+        const btn = document.getElementById('btn-apply');
+        btn.disabled = false;
+        btn.textContent = `Показать ${nums.length} ${pluralQ(nums.length)} →`;
+        // show overlay so user can confirm or change
+        return; // overlay stays open
+      }
+    } catch(e) {}
+  }
+  // no saved selection: overlay already visible, nothing to do
+})();
+
 </script>
 </body>
 </html>
